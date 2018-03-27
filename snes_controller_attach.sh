@@ -17,7 +17,7 @@ VM="$5"
 BUS=$(lsusb | grep ${UNIQUE_SEARCH} | cut -d' ' -f2 | cut -d':' -f1 | cut -d' ' -f1 | cut -d'0' -f3 | cut -d$'\n' -f1)
 BUS=($(echo ${BUS} | sed 's/^0*//'))
 
-# pull the device ID(s) (handles multiple duplicate devices such as game controllers)
+# pull the device ID(s) (handles duplicate devices like game controllers)
 DEVICES=($(lsusb | grep ${UNIQUE_SEARCH} | cut -d' ' -f2,4 | cut -d':' -f1 | cut -d' ' -f2))
 
 # go through the device IDs and strip leading 0s since they'll mess with the attach process
