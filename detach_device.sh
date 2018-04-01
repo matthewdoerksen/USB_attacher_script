@@ -20,18 +20,18 @@ BUS=($(echo ${BUS} | sed 's/^0*//'))
 # pull the device ID(s) (handles duplicate devices like game controllers)
 DEVICES=($(lsusb | grep ${UNIQUE_SEARCH} | cut -d' ' -f2,4 | cut -d':' -f1 | cut -d' ' -f2))
 
-# go through the device IDs and strip leading 0s since they'll mess with the attach process
+# go through the device IDs and strip leading 0s since they'll mess with the detach process
 for ((i=0;i<${#DEVICES[@]};i++)); do
   DEVICES[i]=$(echo ${DEVICES[i]} | sed 's/^0*//')
 done
 
-# iterate over all devices and create the XML for each (and attach)
+# iterate over all devices and create the XML for each (and detach)
 for ((i=0;i<${#DEVICES[@]};i++)); do
   XML="<hostdev mode='subsystem' type='usb' managed='no'><source><vendor id='${VENDOR_ID}'/><product id='${PRODUCT_ID}'/><ad$
   DEVICE_CONFIG="${BASE_FILE}_$i.xml"
   echo "$XML" > "$DEVICE_CONFIG"
   echo "Wrote XML file: $DEVICE_CONFIG"
 
-  echo "Attempting to attach device (Vendor): ${VENDOR_ID}, (Product): ${PRODUCT_ID}, (Bus): ${BUS}, (ID): ${DEVICES[i]}"
+  echo "Attempting to detach device (Vendor): ${VENDOR_ID}, (Product): ${PRODUCT_ID}, (Bus): ${BUS}, (ID): ${DEVICES[i]}"
   virsh detach-device "$VM" "$DEVICE_CONFIG"
 done
