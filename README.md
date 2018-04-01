@@ -1,6 +1,6 @@
 # USB_attacher_script
 
-Automatically find and attach USB devices to VMs to avoid manual re-configuration when devices are moved between machines.
+Automatically find and attach USB devices to KVM VMs to avoid manual re-configuration when devices are moved between machines (such as a keyboard and mouse shared on a USB hub which is plugged/unplugged and shared between computers).
 
 Setup
 1) Add the user scripts plugin
