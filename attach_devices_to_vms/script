@@ -1,6 +1,16 @@
 #!/bin/bash
 
-# Attach devices to emulation station and VM
-/mnt/user/Common/Lakka_Emulation_Station/attach_devices_lakka.sh
+# Attach devices to emulation station and VM (if running)
+# check that we're running first (avoid spinning)
+virsh list --inactive | grep Lakka
+EXITCODE=$(echo "$?")
+if [ $EXITCODE -ne 0 ]; then
+  /mnt/user/Common/Lakka_Emulation_Station/attach_devices_lakka.sh
+fi
 
-/mnt/user/Common/Lakka_Emulation_Station/attach_devices_win10.sh
+# check that we're running first (avoid spinning)
+virsh list --inactive | grep Windows_10
+EXITCODE=$(echo "$?")
+if [ $EXITCODE -ne 0 ]; then
+  /mnt/user/Common/Lakka_Emulation_Station/attach_devices_win10.sh
+fi
