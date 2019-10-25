@@ -7,4 +7,5 @@ The output will be directed to <parsed_ path to dupe file.csv>
 
 Unfortunately DupeGuru cannot read CSV files so we'll need to manually delete the files:
 
-cat <parsed_ path to dupe file.csv> | awk '{split($0,a,","); print a[3] a[2]}'
+cat < path to parsed_dupes.csv> | awk '{split($0,a,","); print "\\""a[3]"/"a[2]"\\""}' > files_to_remove.txt
+
