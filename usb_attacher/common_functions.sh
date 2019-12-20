@@ -18,6 +18,8 @@ MAX_RETRIES=3
 ALL_OR_NOTHING=1
 
 SCRIPT_DIR="$1"
+cd $SCRIPT_DIR
+echo "Current working dir: $(pwd)"
 
 ATTACH_SCRIPT="$SCRIPT_DIR/attach_device.sh"
 DETACH_SCRIPT="$SCRIPT_DIR/detach_device.sh"
